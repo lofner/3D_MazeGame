@@ -16,14 +16,14 @@ public class ButtonManager : MonoBehaviour
             PlayerRotation = player.transform.rotation.y;
         }
     }
-
+    
     public void ToggleToTopView()
     {
-        player.transform.rotation = Vector3(0, 0, 0);
+        //player.transform.rotation = new Vector3(0, 0, 0);
     }
 
     public void ToggleToPlayerView()
     {
-        player.transform.rotation = PlayerRotation;
+        //player.transform.rotation = PlayerRotation;
     }
 }
