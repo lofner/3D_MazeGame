@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 74ab72f4b180b1240b7bcb07cf1f550d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - SpawnPointDoorBottom: {instanceID: 0}
+  - SpawnPointDoorLeft: {instanceID: 0}
+  - SpawnPointDoorTop: {instanceID: 0}
+  - SpawnPointDoorRight: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
