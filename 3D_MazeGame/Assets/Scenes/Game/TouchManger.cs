@@ -13,9 +13,14 @@ public class TouchManger : MonoBehaviour
     public VariableJoystick joystick;
 
     //TopViewMode
-    public GameObject TopViewCamera;
+    public GameObject TopViewCameraObject;
+    public Camera TopViewCamera;
 
     private float PlayerRotation;
+
+    public float ZoomSpeed = 0.5f;
+    public float FieldOfView_MIN = 0.1f;
+    public float FieldOfView_MAX = 179.9f;
 
     // Update is called once per frame
     void Update()
@@ -31,13 +36,43 @@ public class TouchManger : MonoBehaviour
             */
             if (touch.phase == TouchPhase.Moved)
             {
-                if (touch.position.x > Screen.width / 2 && TopViewCamera.activeSelf == false)
+                //Top View Mode deaktive
+                if(TopViewCameraObject.activeSelf == false)
                 {
-                    //Debug.Log("Touch phase Moved");
-
+                    //save Player rotation
                     PlayerRotation = player.transform.rotation.y;
 
-                    player.transform.Rotate(0, touch.deltaPosition.x * PlayerRotationRate, 0, Space.World);
+                    if (touch.position.x > Screen.width / 2)    //right side of display
+                    {
+                        //look around
+                        player.transform.Rotate(0, touch.deltaPosition.x * PlayerRotationRate, 0, Space.World);
+                    }
+
+                    //JoyStick
+                    float moveVertical = joystick.Vertical;
+                    float moveHorizontal = joystick.Horizontal;
+
+                    Vector3 direction = player.transform.forward * joystick.Vertical + player.transform.right * joystick.Horizontal;
+                    player.transform.Translate(direction * PlayerSpeed * Time.deltaTime, Space.World);
+                }
+                
+                //Top View Mode aktive
+                else if (TopViewCameraObject.activeSelf == true)
+                {
+                    Touch touchZero = Input.GetTouch(0);
+                    Touch touchOne = Input.GetTouch(1);
+
+                    Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                    Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+                    float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                    float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+                    float deltaMagnitudediff = prevTouchDeltaMag - touchDeltaMag;
+
+                    TopViewCamera.fieldOfView += deltaMagnitudediff * ZoomSpeed;
+                    TopViewCamera.fieldOfView = Mathf.Clamp(TopViewCamera.fieldOfView, FieldOfView_MIN, FieldOfView_MAX);
+
                 }
             }
             /*
@@ -47,13 +82,6 @@ public class TouchManger : MonoBehaviour
             }
             */
         }
-
-        //JoyStick
-        float moveVertical = joystick.Vertical;
-        float moveHorizontal = joystick.Horizontal;
-
-        Vector3 direction = player.transform.forward * joystick.Vertical + player.transform.right * joystick.Horizontal;
-        player.transform.Translate(direction * PlayerSpeed * Time.deltaTime, Space.World);
     }
 
 }

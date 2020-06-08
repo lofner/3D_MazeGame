@@ -5,13 +5,13 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
     public GameObject player;
-    public GameObject TopViewCamera;
+    public GameObject TopViewCameraObject;
 
     float PlayerRotation;
 
     void Update()
     {
-        if (TopViewCamera.activeSelf == false)
+        if (TopViewCameraObject.activeSelf == false)
         {
             PlayerRotation = player.transform.rotation.y;
         }
