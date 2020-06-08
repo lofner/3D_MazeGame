@@ -47,13 +47,6 @@ public class TouchManger : MonoBehaviour
                         //look around
                         player.transform.Rotate(0, touch.deltaPosition.x * PlayerRotationRate, 0, Space.World);
                     }
-
-                    //JoyStick
-                    float moveVertical = joystick.Vertical;
-                    float moveHorizontal = joystick.Horizontal;
-
-                    Vector3 direction = player.transform.forward * joystick.Vertical + player.transform.right * joystick.Horizontal;
-                    player.transform.Translate(direction * PlayerSpeed * Time.deltaTime, Space.World);
                 }
                 
                 //Top View Mode aktive
@@ -82,6 +75,16 @@ public class TouchManger : MonoBehaviour
             }
             */
         }
-    }
 
+        if(TopViewCameraObject.activeSelf == false)
+        {
+            //JoyStick
+            float moveVertical = joystick.Vertical;
+            float moveHorizontal = joystick.Horizontal;
+
+            Vector3 direction = player.transform.forward * joystick.Vertical + player.transform.right * joystick.Horizontal;
+            player.transform.Translate(direction * PlayerSpeed * Time.deltaTime, Space.World);
+        }
+        
+    }
 }

@@ -8,6 +8,7 @@ TagManager:
   - AreaSpawnPoint
   - Templates
   - Area
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Block
   - Player(TopView)
   - Floor
-  - 
+  - Coins
   - 
   - 
   - 
