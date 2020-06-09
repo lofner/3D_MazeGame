@@ -10,6 +10,10 @@ public class Coin : MonoBehaviour
         {
             ScoresManager.instance.CoinsScore += 1;
 
+            /*
+             * Play sound
+             */
+
             Destroy(gameObject);
         }
     }
