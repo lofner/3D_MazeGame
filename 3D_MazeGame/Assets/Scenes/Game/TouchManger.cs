@@ -8,8 +8,7 @@ public class TouchManger : MonoBehaviour
     //Player Movement
     public float PlayerRotationRateRL = 0.1f;
     public float PlayerRotationRateUD = 0.07f;
-    public float PlayerCameraRotationUD = 0f;
-    public float PlayerCameraRotationUD_now = 0f;
+    private float PlayerCameraRotationUD = 0f;
     public float PlayerSpeed = 10f;
 
     public GameObject player;
@@ -24,8 +23,8 @@ public class TouchManger : MonoBehaviour
     private float PlayerRotation;
 
     public float ZoomSpeed = 0.5f;
-    public float FieldOfView_MIN = 0.1f;
-    public float FieldOfView_MAX = 179.9f;
+    public float Top_FieldOfView_MIN = 0.1f;
+    public float Top_FieldOfView_MAX = 179.9f;
 
     // Update is called once per frame
     void Update()
@@ -53,19 +52,7 @@ public class TouchManger : MonoBehaviour
                         player.transform.Rotate(0, touch.deltaPosition.x * PlayerRotationRateRL, 0, Space.World);
 
                         //look up-down
-                        /*
-                        PlayerCamera.transform.Rotate(-(touch.deltaPosition.y * PlayerRotationRateUD), 0, 0);
-                        if(PlayerCamera.transform.rotation.x >= 35f)
-                        {
-                            PlayerCamera.transform.rotation = Quaternion.Euler(35f, 0, 0);
-                        }
-                        else if (PlayerCamera.transform.rotation.x <= -35f)
-                        {
-                            PlayerCamera.transform.rotation = Quaternion.Euler(-35f, 0, 0);
-                        }
-                        */
                         PlayerCameraRotationUD = -(touch.deltaPosition.y * PlayerRotationRateUD);
-                        PlayerCameraRotationUD_now = PlayerCamera.transform.rotation.eulerAngles.x;
 
                         if((PlayerCamera.transform.rotation.eulerAngles.x + PlayerCameraRotationUD) <= 35f || (PlayerCamera.transform.rotation.eulerAngles.x + PlayerCameraRotationUD) >= 325f)
                         {
@@ -90,7 +77,7 @@ public class TouchManger : MonoBehaviour
                     float deltaMagnitudediff = prevTouchDeltaMag - touchDeltaMag;
 
                     TopViewCamera.fieldOfView += deltaMagnitudediff * ZoomSpeed;
-                    TopViewCamera.fieldOfView = Mathf.Clamp(TopViewCamera.fieldOfView, FieldOfView_MIN, FieldOfView_MAX);
+                    TopViewCamera.fieldOfView = Mathf.Clamp(TopViewCamera.fieldOfView, Top_FieldOfView_MIN, Top_FieldOfView_MAX);
 
                 }
             }
