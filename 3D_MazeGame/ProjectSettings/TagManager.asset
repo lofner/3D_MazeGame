@@ -23,9 +23,9 @@ TagManager:
   - Floor
   - Coins
   - Lamps
-  - 
-  - 
-  - 
+  - Room
+  - IsAnEssentialPartOfARoom
+  - Torch
   - 
   - 
   - 

@@ -6,11 +6,16 @@ public class TouchManger : MonoBehaviour
 {
 
     //Player Movement
-    public float PlayerRotationRate = 0.1f;
+    public float PlayerRotationRateRL = 0.1f;
+    public float PlayerRotationRateUD = 0.07f;
+    public float PlayerCameraRotationUD = 0f;
+    public float PlayerCameraRotationUD_now = 0f;
     public float PlayerSpeed = 10f;
 
     public GameObject player;
     public VariableJoystick joystick;
+
+    public Camera PlayerCamera;
 
     //TopViewMode
     public GameObject TopViewCameraObject;
@@ -44,8 +49,29 @@ public class TouchManger : MonoBehaviour
 
                     if (touch.position.x > Screen.width / 2)    //right side of display
                     {
-                        //look around
-                        player.transform.Rotate(0, touch.deltaPosition.x * PlayerRotationRate, 0, Space.World);
+                        //look left-right
+                        player.transform.Rotate(0, touch.deltaPosition.x * PlayerRotationRateRL, 0, Space.World);
+
+                        //look up-down
+                        /*
+                        PlayerCamera.transform.Rotate(-(touch.deltaPosition.y * PlayerRotationRateUD), 0, 0);
+                        if(PlayerCamera.transform.rotation.x >= 35f)
+                        {
+                            PlayerCamera.transform.rotation = Quaternion.Euler(35f, 0, 0);
+                        }
+                        else if (PlayerCamera.transform.rotation.x <= -35f)
+                        {
+                            PlayerCamera.transform.rotation = Quaternion.Euler(-35f, 0, 0);
+                        }
+                        */
+                        PlayerCameraRotationUD = -(touch.deltaPosition.y * PlayerRotationRateUD);
+                        PlayerCameraRotationUD_now = PlayerCamera.transform.rotation.eulerAngles.x;
+
+                        if((PlayerCamera.transform.rotation.eulerAngles.x + PlayerCameraRotationUD) <= 35f || (PlayerCamera.transform.rotation.eulerAngles.x + PlayerCameraRotationUD) >= 325f)
+                        {
+                            PlayerCamera.transform.Rotate(PlayerCameraRotationUD, 0, 0);
+                        }
+
                     }
                 }
                 
