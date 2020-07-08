@@ -9,6 +9,8 @@ TagManager:
   - Templates
   - Area
   - Coin
+  - RoomSpace
+  - RoomSpawnPoint
   layers:
   - Default
   - TransparentFX

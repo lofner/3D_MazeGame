@@ -22,9 +22,9 @@ public class TouchManger : MonoBehaviour
 
     private float PlayerRotation;
 
-    public float ZoomSpeed = 0.5f;
-    public float Top_FieldOfView_MIN = 0.1f;
-    public float Top_FieldOfView_MAX = 179.9f;
+    public float ZoomSpeed = 0.2f;
+    public float Top_FieldOfView_MIN = 22f;
+    public float Top_FieldOfView_MAX = 100f;
 
     // Update is called once per frame
     void Update()
