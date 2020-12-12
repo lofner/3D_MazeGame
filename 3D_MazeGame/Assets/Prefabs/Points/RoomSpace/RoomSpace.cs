@@ -30,6 +30,8 @@ public class RoomSpace : MonoBehaviour
     void Start()
     {
         templates = GameObject.FindGameObjectWithTag("Templates").GetComponent<PointTemplates>();
+
+        ScoresManager.instance.RoomsCounter += 1;   //count every time a room spawns
     }
 
     void OnTriggerEnter(Collider other)

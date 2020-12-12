@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomTemplates : MonoBehaviour
+public class RoomTemplates_phase_1 : MonoBehaviour
 {
     public GameObject[] UL_rooms;
     public GameObject[] U_rooms;
